@@ -1,0 +1,11 @@
+#imagen {
+    border: 1px solid black; 
+    float: right;
+    width: 305px;
+    padding: 2px;
+    text-align: left;
+}
+
+#subtitle {
+    font-size: 26px;
+}
