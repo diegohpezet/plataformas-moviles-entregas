@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+}
+
+body {
+    background-color: #393d4d;
+}
+
+#container {
+    background-color: white;
+    width: 90%;
+    height: 500px;
+    margin:auto;
+    margin-top: 70px;
+    border-radius: 5px;
+}
+
+#logo b{
+    font-size: 35px;
+}
+
+#logo img{
+    width: 120px;
+    border: 2px solid white;
+    border-radius: 50%;
+    transform: translate(10px, -50px)
+}
+
+a{
+    text-decoration: none;
+    color: rgb(26, 2, 49);
+}
