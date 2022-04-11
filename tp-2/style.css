@@ -53,8 +53,7 @@ strong:nth-child(1) {
     color: #efe;
 }
 
-a {
-    text-decoration: none;
+a:not([href]) {
     font-style: italic;
 }
 
