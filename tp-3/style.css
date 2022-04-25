@@ -52,6 +52,17 @@
       background-color: #ccddaa;
     }
 }
+/*
+Media hover
+Internet Explorer: No
+Chrome: A partir de la versión 38 y de la 50 en Chrome Android
+Edge: A partir de la versión 12
+Firefox/Firefox for Android: A partir de la versión 64
+Opera/Opera Android: A partir de la versión 28
+Safari/Safari on iOS: A partir de la versión 9
+Webview Android: A partir de la versión 38
+Samsung Internet: A partir de la versión 5.0
+*/
 
 @media (device-aspect-ratio: 1/1){
     figure {
