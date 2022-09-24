@@ -2,7 +2,7 @@ kanto = 'limit=151'
 johto = 'limit=100&offset=151'
 hoenn = 'limit=135&offset=251'
 
-document.addEventListener("DOMContentLoaded", async function renderEverything(){
+document.addEventListener("DOMContentLoaded", function renderEverything(){
     fetchPokemon(kanto);
 })
 
