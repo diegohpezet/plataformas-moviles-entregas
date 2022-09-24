@@ -1,6 +1,8 @@
 kanto = 'limit=151'
 johto = 'limit=100&offset=151'
 hoenn = 'limit=135&offset=251'
+sinnoh = 'limit=107&offset=386'
+unova = 'limit=156&offset=493'
 
 document.addEventListener("DOMContentLoaded", function renderEverything(){
     fetchPokemon(kanto);
