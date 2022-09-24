@@ -1,9 +1,13 @@
+kanto = 'limit=151'
+johto = 'limit=100&offset=151'
+hoenn = 'limit=135&offset=251'
+
 document.addEventListener("DOMContentLoaded", async function renderEverything(){
-    fetchKantoPokemon();
+    fetchPokemon(kanto);
 })
 
-function fetchKantoPokemon(){
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+function fetchPokemon(region){
+    fetch('https://pokeapi.co/api/v2/pokemon?'+region)
     .then(response => response.json())
     .then(function(allpokemon){
         allpokemon.results.forEach(function(pokemon){
