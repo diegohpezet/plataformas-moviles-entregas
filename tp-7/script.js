@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function renderEverything(){
+document.addEventListener("DOMContentLoaded", async function renderEverything(){
     fetchKantoPokemon();
 })
 
@@ -10,7 +10,7 @@ function fetchKantoPokemon(){
             fetchPokemonData(pokemon);
         })
     })
-}
+  }
 
 function fetchPokemonData(pokemon){
     let url = pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
@@ -22,15 +22,15 @@ function fetchPokemonData(pokemon){
     })
 }
 
-
-function renderPokemon(pokeData){
+async function renderPokemon(pokeData){
     let allPokemonContainer = document.getElementById('poke-container');
     let pokeContainer = document.createElement("div") //div will be used to hold the data/details for indiviual pokemon.{}
-    pokeContainer.classList.add('card', 'm-1','p-2', 'col-xs-12', 'col-sm-6', 'col-md-4', 'col-lg-3','shadow');
+    pokeContainer.classList.add('card', 'm-1','p-2', 'col-xs-12', 'col-sm-6', 'col-md-3', 'col-lg-2','shadow');
 
-    let pokeName = document.createElement('h4')
-    pokeName.classList.add('text-center') 
-    pokeName.innerText = pokeData.name.toUpperCase()
+    let pokeDescription = document.createElement('div')
+    pokeDescription.classList.add('accordion')
+    pokeDescription.id = pokeData.name+"_description"
+    createDescription(pokeData, pokeDescription)
 
     let pokeNumber = document.createElement('p')
     pokeNumber.innerText = `#${pokeData.id}`
@@ -41,11 +41,7 @@ function renderPokemon(pokeData){
     let pokeTypes = document.createElement('div')
     createTypes(pokeData.types, pokeTypes) // helper function to go through the types array and create li tags for each one
 
-    let pokeDescription = document.createElement('div')
-    pokeDescription.classList.add('accordion')
-    createDescription(pokeDescription)
-
-    pokeContainer.append(pokeName, pokeImage, pokeTypes,pokeDescription);   //appending all details to the pokeContainer div
+    pokeContainer.append(pokeDescription, pokeImage, pokeTypes);   //appending all details to the pokeContainer div
     allPokemonContainer.appendChild(pokeContainer);       //appending that pokeContainer div to the main div which will                                                             hold all the pokemon cards
 }
 
@@ -65,17 +61,34 @@ function createTypes(types, container){
     })
 }
 
-function createDescription(container){
-    let mainBox = document.createElement('div')
-    mainBox.classList.add('accordion-item')
-
-    let header = document.createElement('h2')
-    header.classList.add('accordion-header')
-
-    let btn = document.createElement('button')
-    btn.classList.add('accordion-collapse','collapse')
-    //no matarme y usar https://stackoverflow.com/questions/62233420/creating-an-accordion-through-javascript
-    container.append(mainBox)
-    mainBox.append(header)
-    header.append(btn)
+function createDescription(data, container){
+    container.innerHTML = `<div class="accordion-item">
+    <h2 class="accordion-header" id="heading">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${data.name}" aria-expanded="false" aria-controls="collapseOne">
+        ${data.name.toUpperCase()}
+      </button>
+    </h2>
+    <div id="${data.name}" class="accordion-collapse collapse collapse" aria-labelledby="heading" data-bs-parent="#${data.name}">
+      <div class="accordion-body">
+        <div class="row">
+          <div class="col">
+            #${data.id}
+          </div>
+        <div>
+        <div class="row">
+          <div class="col">
+            <i class="fa fa-ruler-vertical"></i> ${data.height/10}mts
+          </div>
+          <div class="col">
+            <i class="fa fa-weight"></i> ${data.weight/10}kg
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            Base Exp: ${data.base_experience}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`
 }
