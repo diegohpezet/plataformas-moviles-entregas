@@ -1,12 +1,21 @@
-kanto = 'limit=151'
-johto = 'limit=100&offset=151'
-hoenn = 'limit=135&offset=251'
-sinnoh = 'limit=107&offset=386'
-unova = 'limit=156&offset=493'
+const regions = [
+    kanto = 'limit=151',
+    johto = 'limit=100&offset=151',
+    hoenn = 'limit=135&offset=251',
+    sinnoh = 'limit=107&offset=386',
+    unova = 'limit=156&offset=493',
+];
+
 
 document.addEventListener("DOMContentLoaded", function renderEverything(){
-    fetchPokemon(kanto);
+    fetchPokemon(regions[0]);
 })
+
+function regionSelector(region){
+    let allPokemonContainer = document.querySelector('#poke-container')
+    allPokemonContainer.innerText = ""
+    fetchPokemon(regions[region])
+}
 
 function fetchPokemon(region){
     fetch('https://pokeapi.co/api/v2/pokemon?'+region)
@@ -28,7 +37,7 @@ function fetchPokemonData(pokemon){
     })
 }
 
-async function renderPokemon(pokeData){
+function renderPokemon(pokeData){
     let allPokemonContainer = document.getElementById('poke-container');
     let pokeContainer = document.createElement("div") //div will be used to hold the data/details for indiviual pokemon.{}
     pokeContainer.classList.add('card', 'm-1','p-2', 'col-xs-12', 'col-sm-6', 'col-md-3', 'col-lg-2','shadow');
@@ -42,7 +51,7 @@ async function renderPokemon(pokeData){
     pokeNumber.innerText = `#${pokeData.id}`
 
     let pokeImage = document.createElement('img')
-    pokeImage.setAttribute('src',pokeData.sprites.front_default)
+    pokeImage.setAttribute('src',pokeData.sprites.front_shiny)
   
     let pokeTypes = document.createElement('div')
     createTypes(pokeData.types, pokeTypes) // helper function to go through the types array and create li tags for each one
