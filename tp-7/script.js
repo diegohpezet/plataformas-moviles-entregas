@@ -6,17 +6,19 @@ const regions = [
     unova = 'limit=156&offset=493',
 ];
 
-
+//On load, every pokemon from the selected region is rendered
 document.addEventListener("DOMContentLoaded", function renderEverything(){
     fetchPokemon(regions[0]);
 })
 
+//Allows to chose which region to pick pokemon from
 function regionSelector(region){
     let allPokemonContainer = document.querySelector('#poke-container')
     allPokemonContainer.innerText = ""
     fetchPokemon(regions[region])
 }
 
+//Fetch pokemon from selected region
 function fetchPokemon(region){
     fetch('https://pokeapi.co/api/v2/pokemon?'+region)
     .then(response => response.json())
@@ -27,9 +29,9 @@ function fetchPokemon(region){
     })
   }
 
+//Retrieves data from every pokemon individually
 function fetchPokemonData(pokemon){
-    let url = pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
-                                //Example: https://pokeapi.co/api/v2/pokemon/1/"
+    let url = pokemon.url
     fetch(url)
     .then(response => response.json())
     .then(function(pokeData){
@@ -37,6 +39,7 @@ function fetchPokemonData(pokemon){
     })
 }
 
+//Renders pokemon info
 function renderPokemon(pokeData){
     let allPokemonContainer = document.getElementById('poke-container');
     let pokeContainer = document.createElement("div") //div will be used to hold the data/details for indiviual pokemon.{}
@@ -60,6 +63,7 @@ function renderPokemon(pokeData){
     allPokemonContainer.appendChild(pokeContainer);       //appending that pokeContainer div to the main div which will                                                             hold all the pokemon cards
 }
 
+//Helper function to create types display for every item
 function createTypes(types, container){   
     let typeLi = document.createElement('div');
     typeLi.classList.add('img-responsive','d-flex','justify-content-center','m-1')
@@ -76,6 +80,7 @@ function createTypes(types, container){
     })
 }
 
+//Function that creates a BS accordion with pokemon's data
 function createDescription(data, container){
     container.innerHTML = `<div class="accordion-item">
     <h2 class="accordion-header" id="heading">
